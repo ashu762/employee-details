@@ -1,4 +1,6 @@
 import { validateName, createPost } from "./utils.js";
+
+// Dom Element Selections
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const other = document.querySelector("#other");
@@ -12,11 +14,11 @@ const errorContainer = document.querySelector(".errors");
 const checkBoxIcon = document.querySelector(".icon--checkbox");
 const resetButton = document.querySelector(".reset");
 const male = document.querySelector("#male");
-
+const loading = document.querySelector(".loading");
+const loadingModal = document.querySelector(".loading-modal");
 const previousPosts = document.querySelector(".previous-posts");
 
 const url = "https://employeeapi2626.herokuapp.com/api/employees";
-
 let isAutoFocused = false;
 const errors = [];
 let isMarried = true;
@@ -81,8 +83,20 @@ function validateTermsAndConditions() {
   } else checkBoxIcon.classList.add("icon--checkbox");
 }
 
+// Loading
+function setLoading() {
+  loadingModal.style.display = "block";
+  loading.style.visibility = "block";
+}
+
+function removeLoading() {
+  loadingModal.style.display = "none";
+  loading.style.visibility = "none";
+}
+
 // Form Submission
 async function submitForm() {
+  setLoading();
   const data = {
     firstName: firstName.value,
     lastName: lastName.value,
@@ -91,6 +105,7 @@ async function submitForm() {
     gender: male.checked ? "male" : "female",
     comments: other.value,
   };
+
   const url = "https://employeeapi2626.herokuapp.com/api/employees";
   try {
     let response = await fetch(url, {
@@ -101,9 +116,13 @@ async function submitForm() {
       body: JSON.stringify(data),
     });
     response = await response.json();
+    removeLoading();
+    alert("Thank you.Your response has been Saved");
     console.log(response);
   } catch (error) {
     console.log(error);
+    removeLoading();
+    alert("Please try Again!");
   }
 }
 
@@ -133,8 +152,7 @@ submitButton.addEventListener("click", (event) => {
   submitForm();
 });
 
-resetButton.addEventListener("click", (event) => {
-  event.preventDefault();
+function resetData() {
   errorContainer.innerHTML = "";
   firstName.focus();
   isAutoFocused = false;
@@ -142,8 +160,26 @@ resetButton.addEventListener("click", (event) => {
   lastNameIcon.classList.add("icon--lastName");
   spouseIcon.classList.add("icon--spouse");
   checkBoxIcon.classList.add("icon--checkbox");
-});
+}
 
+resetButton.addEventListener("click", resetData);
+
+async function fetchPreviousForms() {
+  try {
+    let response = await fetch(url);
+    response = await response.json();
+    const posts = [];
+    for (let post of response) {
+      previousPosts.appendChild(createPost(post));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+fetchPreviousForms();
+
+// Modal
 const modal = document.querySelector("#my-modal");
 const modalBtn = document.querySelector("#modal-btn");
 const closeBtn = document.querySelector(".close-btn");
@@ -165,18 +201,3 @@ function outsideClick(e) {
     modal.style.display = "none";
   }
 }
-
-async function fetchPreviousForms() {
-  try {
-    let response = await fetch(url);
-    response = await response.json();
-    const posts = [];
-    for (let post of response) {
-      previousPosts.appendChild(createPost(post));
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-fetchPreviousForms();
