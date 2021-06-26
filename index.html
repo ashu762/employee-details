@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="index.js" defer type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="errors">
+
+        </div>
+        <form>
+
+            <div class="element">
+                <label for="firstName">First Name</label>
+                <div>
+                    <input type="text" id="firstName" name="firstName" autofocus>
+                    <i class="fa fa-exclamation-circle fa-lg icon icon--firstName">
+                    </i>
+                </div>
+            </div>
+
+            <div class="element">
+                <label for="lastName">Last Name</label>
+                <div>
+                    <input type="text" id="lastName" name="lastName">
+                    <i class="fa fa-exclamation-circle fa-lg icon icon--lastName">
+
+                    </i>
+                </div>
+
+            </div>
+            <div class="element">
+                <label>Gender</label>
+                <div class="radios">
+                    <div>
+                        <input type="radio" id="male" name="gender" value="MALE" checked>
+                        <span for="male">MALE</span>
+                    </div>
+                    <div>
+                        <input type="radio" id="female" name="gender" value="FEMALE">
+                        <span for="female">FEMALE</span>
+                    </div>
+                    <!-- <i class="fa fa-exclamation-circle fa-lg"></i> -->
+
+                </div>
+
+
+            </div>
+            <div class="element">
+                <label>Martial Status</label>
+                <div class="radios">
+                    <div>
+                        <input type="radio" id="married" name="martial_status" value="Married" checked>
+                        <span for="married">Married</span>
+                    </div>
+                    <div>
+                        <input type="radio" id="unmarried" name="martial_status" value="Unmarried">
+                        <span for="unmarried">Unmarried</span>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="element">
+                <label for="spouse">Name of Spouse</label>
+                <div>
+                    <input type="text" id="spouse" name="spouse">
+
+                    <i class="fa fa-exclamation-circle fa-lg icon icon--spouse"></i>
+                </div>
+
+            </div>
+            <div class="element">
+                <label for="other">Other Details</label>
+                <div>
+                    <textarea type="text" id="other" name="other"></textarea>
+                    <i class="fa fa-exclamation-circle fa-lg icon icon--other"></i>
+                </div>
+
+            </div>
+            <div class="terms">
+                <input type="checkbox" id="checked" name="checked">
+                <span>I accept the <span class="termsLink">terms and conditions</span></span>
+                <i class="fa fa-exclamation-circle fa-lg icon icon--checkbox"></i>
+
+            </div>
+            <div class="buttons">
+                <div class="btn reset">RESET</div>
+                <div class="btn btn-submit">SUBMIT</div>
+            </div>
+        </form>
+    </div>
+    <div class="previous">
+        <div class="previous--title">Previous Forms</div>
+    </div>
+    <div class="previous-posts">
+        <div class="post">
+            <div class="avatar">AP</div>
+            <div>FirstName : Ashutosh</div>
+            <div>LastName : Pandey</div>
+            <div>Gender : Male</div>
+            <div>Martial Status : True</div>
+            <div>Comments : Hello there lorem300</div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<!-- 
+    First Name: String
+    Last Name: String
+    Gender :Enum Radio (MALE FEMALE)
+    Martial Status: Enum Radio (Married Unmarried)
+    Name of spouse: String(Only when Married)
+    Order Details:
+    Terms and conditions (Checkbox+link)
+    Buttons Reset And Save
+ -->
