@@ -173,8 +173,68 @@ i {
   color: red;
 }
 
-@media screen and (max-width: 600px) {
+/* .button:hover {
+  background: #3876ac;
+} */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  margin: 10% auto;
+  background-color: white;
+  border-radius: 1rem;
+  width: 50%;
+  padding: 1rem 2rem;
+  box-shadow: 0 0.3rem 0.5rem 0 rgba(0, 0, 0, 0.2),
+    0 0.45rem 1.3rem 0 rgba(0, 0, 0, 0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.terms--title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.term {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+
+.close-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.3rem 2rem;
+}
+
+@media screen and (max-width: 700px) {
   * {
     font-size: 14px;
+  }
+  .modal-content {
+    width: 80%;
   }
 }

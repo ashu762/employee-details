@@ -95,6 +95,7 @@ submitButton.addEventListener("click", (event) => {
     }
     return;
   }
+  alert("Thank You");
 });
 
 resetButton.addEventListener("click", (event) => {
@@ -107,3 +108,25 @@ resetButton.addEventListener("click", (event) => {
   spouseIcon.classList.add("icon--spouse");
   checkBoxIcon.classList.add("icon--checkbox");
 });
+
+const modal = document.querySelector("#my-modal");
+const modalBtn = document.querySelector("#modal-btn");
+const closeBtn = document.querySelector(".close-btn");
+
+modalBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+window.addEventListener("click", outsideClick);
+
+function openModal() {
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+function outsideClick(e) {
+  if (e.target == modal) {
+    modal.style.display = "none";
+  }
+}
