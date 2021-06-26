@@ -99,8 +99,8 @@ textarea {
   display: inline;
   padding: 0.4rem 1rem;
   border-radius: 0.3rem;
-  font-weight: 600;
-  color: #416dca;
+  font-weight: bold;
+  color: #26458a;
 }
 
 .previous-posts {
@@ -155,7 +155,7 @@ i {
 }
 .avatar {
   color: white;
-  background-color: rgba(58, 149, 209, 0.726);
+  background-color: rgba(58, 204, 209, 0.726);
   border-radius: 2rem;
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;

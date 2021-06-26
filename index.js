@@ -1,4 +1,4 @@
-import { validateName } from "./validator.js";
+import { validateName, createPost } from "./utils.js";
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
 const other = document.querySelector("#other");
@@ -11,9 +11,18 @@ const spouseIcon = document.querySelector(".icon--spouse");
 const errorContainer = document.querySelector(".errors");
 const checkBoxIcon = document.querySelector(".icon--checkbox");
 const resetButton = document.querySelector(".reset");
+const male = document.querySelector("#male");
+
+const previousPosts = document.querySelector(".previous-posts");
+
+const url = "https://employeeapi2626.herokuapp.com/api/employees";
+
 let isAutoFocused = false;
 const errors = [];
 let isMarried = true;
+
+// Validators
+
 document.querySelector("#unmarried").addEventListener("click", (event) => {
   spouse.value = "";
   spouse.disabled = true;
@@ -72,6 +81,32 @@ function validateTermsAndConditions() {
   } else checkBoxIcon.classList.add("icon--checkbox");
 }
 
+// Form Submission
+async function submitForm() {
+  const data = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    spouse: spouse.value,
+    martial_status: isMarried ? "married" : "unmarried",
+    gender: male.checked ? "male" : "female",
+    comments: other.value,
+  };
+  const url = "https://employeeapi2626.herokuapp.com/api/employees";
+  try {
+    let response = await fetch(url, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    response = await response.json();
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 submitButton.addEventListener("click", (event) => {
   isAutoFocused = false;
   event.preventDefault();
@@ -95,7 +130,7 @@ submitButton.addEventListener("click", (event) => {
     }
     return;
   }
-  alert("Thank You");
+  submitForm();
 });
 
 resetButton.addEventListener("click", (event) => {
@@ -130,3 +165,18 @@ function outsideClick(e) {
     modal.style.display = "none";
   }
 }
+
+async function fetchPreviousForms() {
+  try {
+    let response = await fetch(url);
+    response = await response.json();
+    const posts = [];
+    for (let post of response) {
+      previousPosts.appendChild(createPost(post));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+fetchPreviousForms();
