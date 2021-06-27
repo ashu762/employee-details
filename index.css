@@ -135,8 +135,7 @@ textarea {
 
 .previous-posts {
   display: flex;
-  margin: 4rem;
-
+  margin: 3rem 2rem;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -171,7 +170,6 @@ i {
   width: 18rem;
   height: 20rem;
   margin: 2rem;
-  margin-top: 2rem;
   border-radius: 0.4rem;
   background-color: white;
 
