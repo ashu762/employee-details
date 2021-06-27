@@ -18,28 +18,30 @@ export function createPost(post) {
   avatardiv.classList.add("avatar");
   ele.appendChild(avatardiv);
   const firstNameElement = document.createElement("div");
-  firstNameElement.innerText = `FirstName : ${post["firstName"]}`;
+  firstNameElement.innerHTML = `<strong>FirstName</strong> : ${post["firstName"]}`;
   ele.appendChild(firstNameElement);
   const lastNameElement = document.createElement("div");
-  lastNameElement.innerText = `LastName : ${post["lastName"]}`;
+  lastNameElement.innerHTML = `<strong>LastName</strong> : ${post["lastName"]}`;
   ele.appendChild(lastNameElement);
 
   const genderElement = document.createElement("div");
-  genderElement.innerText = `Gender : ${post["gender"].toUpperCase()}`;
+  genderElement.innerHTML = `<strong>Gender</strong> : ${post[
+    "gender"
+  ].toUpperCase()}`;
   ele.appendChild(genderElement);
   const martialStatusElement = document.createElement("div");
-  martialStatusElement.innerText = `Martial Status : ${post[
+  martialStatusElement.innerHTML = `<strong>Martial Status</strong> : ${post[
     "martial_status"
   ].toUpperCase()}`;
   ele.appendChild(martialStatusElement);
   if (post["spouse"].length > 0) {
     const spouseElement = document.createElement("div");
-    spouseElement.innerText = `Spouse : ${post["spouse"]}`;
+    spouseElement.innerHTML = `<strong>Spouse</strong> : ${post["spouse"]}`;
     ele.appendChild(spouseElement);
   }
   if (post["comments"].length > 0) {
     const commentsElement = document.createElement("div");
-    commentsElement.innerText = `Comments : ${post["comments"]}`;
+    commentsElement.innerHTML = `<strong>Comments</strong> : ${post["comments"]}`;
     ele.appendChild(commentsElement);
   }
   return ele;
