@@ -8,17 +8,13 @@
   font-family: DM Sans;
 }
 
-body {
-  background-color: #eef2f7;
-}
-
 .heading {
   text-align: center;
   margin-top: 5rem;
   font-family: arvo;
   font-size: 2rem;
   font-weight: bold;
-  color: #4b0b53;
+  color: #731780;
 }
 
 .container {
@@ -121,12 +117,13 @@ textarea {
 }
 .previous--title {
   font-size: 2rem;
+  font-family: arvo;
   display: inline;
   padding: 0.4rem 1rem;
   border-radius: 0.3rem;
 
   font-weight: bold;
-  color: #26458a;
+  color: #731780;
   -webkit-border-radius: 0.3rem;
   -moz-border-radius: 0.3rem;
   -ms-border-radius: 0.3rem;
