@@ -117,6 +117,9 @@ async function submitForm() {
     });
     response = await response.json();
     removeLoading();
+    previousPosts.innerHTML = "";
+    await fetchPreviousForms();
+
     alert("Thank you.Your response has been Saved");
     console.log(response);
   } catch (error) {
@@ -170,6 +173,7 @@ async function fetchPreviousForms() {
     let response = await fetch(url);
     response = await response.json();
     const posts = [];
+    previousPosts.innerHTML = "";
     for (let post of response) {
       previousPosts.appendChild(createPost(post));
     }
