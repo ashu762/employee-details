@@ -165,6 +165,7 @@ function resetData() {
 resetButton.addEventListener("click", resetData);
 
 async function fetchPreviousForms() {
+  setLoading();
   try {
     let response = await fetch(url);
     response = await response.json();
@@ -172,7 +173,9 @@ async function fetchPreviousForms() {
     for (let post of response) {
       previousPosts.appendChild(createPost(post));
     }
+    removeLoading();
   } catch (error) {
+    removeLoading();
     console.log(error);
   }
 }

@@ -13,7 +13,7 @@ export function createPost(post) {
   const ele = document.createElement("div");
   ele.classList.add("post");
   const avatartext = (post["firstName"][0] + post["lastName"][0]).toUpperCase();
-  const avatardiv = document.createElement("div");
+  const avatardiv = document.createElement("span");
   avatardiv.innerText = avatartext;
   avatardiv.classList.add("avatar");
   ele.appendChild(avatardiv);

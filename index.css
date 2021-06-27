@@ -285,3 +285,16 @@ i {
     transform: rotate(360deg);
   }
 }
+
+.commenty {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 15rem;
+}
