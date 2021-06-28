@@ -121,7 +121,7 @@ textarea {
 }
 
 .reset {
-  background-color: rgba(247, 47, 47, 0.747);
+  background-color: rgba(189, 176, 122, 0.747);
 }
 
 .termsLink {
@@ -394,6 +394,11 @@ strong {
   .employee--form{
     width:100%;
   }
+}
+
+.btn-delete{
+  display: none;
+  background-color:rgba(247, 47, 47, 0.747);
 }
 
 

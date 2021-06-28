@@ -45,7 +45,7 @@ export function createPost(post) {
     ele.appendChild(commentsElement);
   }
   const viewDetails=document.createElement("div");
-  viewDetails.innerText="View Details";
+  viewDetails.innerText="Edit Details";
   viewDetails.classList.add("btn");
   viewDetails.id=post._id;
   ele.appendChild(viewDetails);
@@ -53,7 +53,6 @@ export function createPost(post) {
   const modal=document.createElement("div");
   modal.classList.add("viewEmployeeModal");
   const modal_content=document.createElement("div");
-  modal_content.innerHTML="asfsaf";
   modal_content.classList.add("employeeModal");
   modal.appendChild(modal_content);
   ele.appendChild(modal);

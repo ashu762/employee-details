@@ -13,7 +13,11 @@ const spouseIcon = document.querySelector(".icon--spouse");
 const errorContainer = document.querySelector(".errors");
 const checkBoxIcon = document.querySelector(".icon--checkbox");
 const resetButton = document.querySelector(".reset");
+const deleteButton=document.querySelector(".btn-delete");
 const male = document.querySelector("#male");
+const married=document.querySelector("#married");
+const female=document.querySelector("#female");
+const unmarried=document.querySelector("#unmarried");
 const loading = document.querySelector(".loading");
 const loadingModal = document.querySelector(".loading-modal");
 const previousPosts = document.querySelector(".previous-posts");
@@ -28,6 +32,10 @@ const filterInput=document.querySelector(".filter-input");
 let isAutoFocused = false;
 const errors = [];
 let isMarried = true;
+
+let isEditableForm=false;
+let employeeId="";
+
 
 // Validators
 
@@ -102,6 +110,9 @@ function removeLoading() {
 
 // Form Submission
 async function submitForm() {
+
+
+
   setLoading();
   const data = {
     firstName: firstName.value,
@@ -111,11 +122,12 @@ async function submitForm() {
     gender: male.checked ? "male" : "female",
     comments: other.value,
   };
-
-  const url = "https://employeeapi2626.herokuapp.com/api/employees";
+  const queryString=isEditableForm?employeeId:"";
+  const url = `https://employeeapi2626.herokuapp.com/api/employees/${queryString}`;
+  const method=isEditableForm?"PUT":"POST";
   try {
     let response = await fetch(url, {
-      method: "post",
+      method: method,
       headers: {
         "Content-type": "application/json",
       },
@@ -124,10 +136,12 @@ async function submitForm() {
     response = await response.json();
     removeLoading();
     alert("Thank you.Your response has been Saved");
-    console.log(response);
+    resetData();
   } catch (error) {
     console.log(error);
     removeLoading();
+    isEditableForm=false;
+    employeeId="";
     alert("Please try Again!");
   }
 }
@@ -166,6 +180,11 @@ function resetData() {
   lastNameIcon.classList.add("icon--lastName");
   spouseIcon.classList.add("icon--spouse");
   checkBoxIcon.classList.add("icon--checkbox");
+  setValues({})
+  recoverConfiguration();
+  previousPosts.innerText=""
+  isEditableForm=false;
+  employeeId=""
 }
 
 resetButton.addEventListener("click", resetData);
@@ -229,24 +248,28 @@ function outsideClick(e) {
   }
 }
 
-function openEmployeeModal()
-{
-  viewEmployeeModal.style.dislay="block";
-  // employeeModal.style.visibility="block";
- 
-  
-}
 
-window.addEventListener("click",(e)=>{
+window.addEventListener("click",async(e)=>{
 
-  if(e.target.innerText==="View Details")
+  if(e.target.innerText==="Edit Details")
   {
-      openEmployeeModal();
-      console.log(e.target.id);
+      setLoading();
+      
+      resetData();
+      isEditableForm=true;
+      employeeId=e.target.id;
+      let employee=await fetch(`${url}/${e.target.id}`);
+      employee=await employee.json();
+      setValues(employee[0]);
+      changeConfiguration();
+
+      removeLoading();
   }
   
   
 })
+
+
 
 
 previousFormBtn.addEventListener("click",(e)=>{
@@ -257,13 +280,82 @@ previousFormBtn.addEventListener("click",(e)=>{
 //filter handling
 
 filterButton.addEventListener("click",(e)=>{
-  
   const type=dropDownElementSelector.value;
   const filteredInput=filterInput.value;
   fetchPreviousForms(filteredInput,type);
 
-  
 
 })
+
+
+function setValues(employee)
+{
+  
+  firstName.value=employee.firstName || "";
+  lastName.value=employee.lastName|| "";
+  spouse.value=employee.spouse||"";
+  toggle(male,female);
+  toggle(married,unmarried);
+  if(employee.gender==='female')
+    toggle(female,male);
+  if(employee.martial_status==="unmarried")
+    {
+      toggle(unmarried,married);
+      spouse.disabled=true;
+      isMarried=false;
+    }
+  
+  other.value=employee.comments||"";
+}
+
+function toggle(val1,val2)
+{
+  val1.checked=true;
+  val2.checked=false;
+}
+
+function changeConfiguration()
+{
+  submitButton.innerText="SAVE";
+  resetButton.innerText="CANCEL";
+  deleteButton.style.display="block"
+}
+function recoverConfiguration()
+{
+    deleteButton.style.display="none";
+    resetButton.innerText="RESET";
+    submitButton.innerText="SUBMIT";
+}
+
+
+deleteButton.addEventListener("click",async(e)=>{
+
+    setLoading();
+    try{
+      let data=await fetch(`${url}/${employeeId}`,{
+        method:"DELETE"
+      })
+      data=await data.json();
+      console.log(data);
+      previousPosts.innerText="";
+      setValues({});
+      alert("Employee Details Deletion Successful")
+      removeLoading();
+      recoverConfiguration();
+      isEditableForm=false;
+      employeeId="";
+
+
+
+    }
+    catch(e)
+    {
+      console.log(e);
+      alert("Some Error Occured");
+      removeLoading();
+    }
+})
+
+
 
 
