@@ -34,15 +34,38 @@ export function createPost(post) {
     "martial_status"
   ].toUpperCase()}`;
   ele.appendChild(martialStatusElement);
-  if (post["spouse"].length > 0) {
+  if (post["spouse"]&&post["spouse"].length > 0) {
     const spouseElement = document.createElement("div");
     spouseElement.innerHTML = `<strong>Spouse</strong> : ${post["spouse"]}`;
     ele.appendChild(spouseElement);
   }
-  if (post["comments"].length > 0) {
+  if (post["commnets"]&&post["comments"].length > 0) {
     const commentsElement = document.createElement("div");
     commentsElement.innerHTML = `<strong>Comments</strong> : ${post["comments"]}`;
     ele.appendChild(commentsElement);
   }
+  const viewDetails=document.createElement("div");
+  viewDetails.innerText="View Details";
+  viewDetails.classList.add("btn");
+  viewDetails.id=post._id;
+  ele.appendChild(viewDetails);
+
+  const modal=document.createElement("div");
+  modal.classList.add("viewEmployeeModal");
+  const modal_content=document.createElement("div");
+  modal_content.innerHTML="asfsaf";
+  modal_content.classList.add("employeeModal");
+  modal.appendChild(modal_content);
+  ele.appendChild(modal);
   return ele;
+}
+
+
+
+export function isFilteredEvent(input,type,post)
+{
+  
+  if(post[type]&&post[type].toLowerCase()===input.toLowerCase())
+  return true;
+  return false;
 }

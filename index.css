@@ -6,6 +6,24 @@
   padding: 0px;
   font-size: 16px;
   font-family: DM Sans;
+  
+}
+/* body{
+  background-color: black;
+} */
+
+.parent{
+  display: flex;
+}
+.cards{
+  width:35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.employee--form{
+  width:65%;
 }
 
 .heading {
@@ -116,9 +134,9 @@ textarea {
   margin: 6rem 1rem;
 }
 .previous--title {
-  font-size: 2rem;
-  font-family: arvo;
-  display: inline;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  display: inline-block;
   padding: 0.4rem 1rem;
   border-radius: 0.3rem;
 
@@ -324,6 +342,26 @@ strong {
   width: 15rem;
 }
 
+.viewEmployeeModal
+{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.247);
+}
+/* .employeeModal{
+
+  visibility: none;
+  text-align: center;
+  margin-top: 10vh;
+
+} */
+
 @media screen and (max-width: 4000px) {
   * {
     font-size: 20px;
@@ -333,12 +371,29 @@ strong {
   * {
     font-size: 16px;
   }
+  .employee--form{
+    width:55%;
+  }
+  .cards{
+    width:55%;
+  }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   * {
     font-size: 14px;
   }
   .modal-content {
     width: 80%;
   }
+  .parent{
+    flex-direction: column;
+  }
+  .cards{
+    width:100%;
+  }
+  .employee--form{
+    width:100%;
+  }
 }
+
+

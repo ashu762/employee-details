@@ -1,4 +1,4 @@
-import { validateName, createPost } from "./utils.js";
+import { validateName, createPost,isFilteredEvent } from "./utils.js";
 
 // Dom Element Selections
 const firstName = document.querySelector("#firstName");
@@ -17,8 +17,14 @@ const male = document.querySelector("#male");
 const loading = document.querySelector(".loading");
 const loadingModal = document.querySelector(".loading-modal");
 const previousPosts = document.querySelector(".previous-posts");
-
+const viewEmployeeModal=document.querySelector(".viewEmployeeModal");
+const employeeModal=document.querySelector(".employeeModal");
 const url = "https://employeeapi2626.herokuapp.com/api/employees";
+const filterButton=document.querySelector("#filter-btn")
+const previousFormBtn=document.querySelector("#previousFormBtn");
+const dropDownElementSelector=document.querySelector("#selector");
+
+const filterInput=document.querySelector(".filter-input");
 let isAutoFocused = false;
 const errors = [];
 let isMarried = true;
@@ -117,9 +123,6 @@ async function submitForm() {
     });
     response = await response.json();
     removeLoading();
-    previousPosts.innerHTML = "";
-    await fetchPreviousForms();
-
     alert("Thank you.Your response has been Saved");
     console.log(response);
   } catch (error) {
@@ -167,15 +170,32 @@ function resetData() {
 
 resetButton.addEventListener("click", resetData);
 
-async function fetchPreviousForms() {
+async function fetchPreviousForms(input,type) {
   setLoading();
   try {
     let response = await fetch(url);
     response = await response.json();
     const posts = [];
     previousPosts.innerHTML = "";
+    let numberOfPosts=0;
     for (let post of response) {
-      previousPosts.appendChild(createPost(post));
+      if(!type)
+      {
+        numberOfPosts++;
+        previousPosts.appendChild(createPost(post));
+      }
+      
+      if(type&&isFilteredEvent(input,type,post))
+      {
+        previousPosts.appendChild(createPost(post));
+        numberOfPosts++;
+      }
+      
+    }
+
+    if(type&&numberOfPosts===0)
+    {
+        alert("No filter Found for the specified data")
     }
     removeLoading();
   } catch (error) {
@@ -184,7 +204,7 @@ async function fetchPreviousForms() {
   }
 }
 
-fetchPreviousForms();
+
 
 // Modal
 const modal = document.querySelector("#my-modal");
@@ -208,3 +228,42 @@ function outsideClick(e) {
     modal.style.display = "none";
   }
 }
+
+function openEmployeeModal()
+{
+  viewEmployeeModal.style.dislay="block";
+  // employeeModal.style.visibility="block";
+ 
+  
+}
+
+window.addEventListener("click",(e)=>{
+
+  if(e.target.innerText==="View Details")
+  {
+      openEmployeeModal();
+      console.log(e.target.id);
+  }
+  
+  
+})
+
+
+previousFormBtn.addEventListener("click",(e)=>{
+  fetchPreviousForms();
+})
+
+
+//filter handling
+
+filterButton.addEventListener("click",(e)=>{
+  
+  const type=dropDownElementSelector.value;
+  const filteredInput=filterInput.value;
+  fetchPreviousForms(filteredInput,type);
+
+  
+
+})
+
+
