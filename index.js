@@ -23,10 +23,18 @@ const loadingModal = document.querySelector(".loading-modal");
 const previousPosts = document.querySelector(".previous-posts");
 const viewEmployeeModal=document.querySelector(".viewEmployeeModal");
 const employeeModal=document.querySelector(".employeeModal");
+const drawerCloseButton=document.querySelector(".closebtn");
+const drawer=document.querySelector("#mySidenav");
+const drawerButton=document.querySelector(".side-drawer-icon")
+const threeDotsMenu=document.querySelector(".three-dots");
+let previousEmployeeData;
 const url = "https://employeeapi2626.herokuapp.com/api/employees";
 const filterButton=document.querySelector("#filter-btn")
 const previousFormBtn=document.querySelector("#previousFormBtn");
 const dropDownElementSelector=document.querySelector("#selector");
+
+
+const formContainer=document.querySelector(".container");
 
 const filterInput=document.querySelector(".filter-input");
 let isAutoFocused = false;
@@ -254,11 +262,12 @@ window.addEventListener("click",async(e)=>{
   if(e.target.innerText==="Edit Details")
   {
       setLoading();
-      
+      drawer.style.width="0px";
       resetData();
       isEditableForm=true;
       employeeId=e.target.id;
       let employee=await fetch(`${url}/${e.target.id}`);
+      checkBox.checked=true;
       employee=await employee.json();
       setValues(employee[0]);
       changeConfiguration();
@@ -316,7 +325,7 @@ function toggle(val1,val2)
 
 function changeConfiguration()
 {
-  submitButton.innerText="SAVE";
+  submitButton.innerText="UPDATE";
   resetButton.innerText="CANCEL";
   deleteButton.style.display="block"
 }
@@ -344,6 +353,7 @@ deleteButton.addEventListener("click",async(e)=>{
       recoverConfiguration();
       isEditableForm=false;
       employeeId="";
+      filterInput.value="";
 
 
 
@@ -359,3 +369,23 @@ deleteButton.addEventListener("click",async(e)=>{
 
 
 
+drawerButton.addEventListener("click",(e)=>{
+  
+  drawer.style.width="27rem";
+
+ if(window.screen.width<1400)
+ drawer.style.width="100%"
+})
+
+drawerCloseButton.addEventListener("click",(e)=>{
+ 
+  drawer.style.width="0px";
+})
+
+
+// window.addEventListener("click",(e)=>{
+//   if(e.target.id)
+//   {
+    
+//   }
+// })

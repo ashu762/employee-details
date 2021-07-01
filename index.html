@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <div class="side-drawer-icon">
+        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+    </div>
     <div class="parent">
         <div class="employee--form">
     <div class="heading">Employee Input Form</div>
@@ -145,10 +148,11 @@
     
 
 </div>
-<div class="cards">
+<div class="cards sidenav" id="mySidenav" >
+    <a href="javascript:void(0)" class="closebtn">&times;</a>
     <div class="previous">
         <div class="btn previous--title" id="previousFormBtn">Previous Forms</div>
-        <div>Filter</div>
+        <div class="filter-text">Filter</div>
         
             <input class="filter-input">
         <label for="options"></label>
@@ -165,7 +169,20 @@
         
         
         <div class="previous-posts">
+        
             <!-- <div class="post">
+                <div class="three-dots-options">
+                    <div class="delete-card">Delete</div>
+                    <div class="edit-card">Edit</div>
+                </div>
+                   
+                
+                <div class="three-dots">
+                    <i class="fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
+                   
+                   
+                </div>
+
                 <span class="avatar">AP</span>
                 <div>
                     <strong>FirstName</strong> : Ashutosh

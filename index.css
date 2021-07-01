@@ -8,23 +8,32 @@
   font-family: DM Sans;
   
 }
-/* body{
-  background-color: black;
-} */
+body{
+ 
+  /* background: #ad5389;  
+background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  
+background: linear-gradient(to right, #3c1053, #ad5389);  */
 
-.parent{
-  display: flex;
+background-color :#7cffcb;
+background-image :linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
+
+
 }
-.cards{
+
+/* .parent{
+  display: flex;
+  justify-content: flex-end;
+} */
+/* .cards{
   width:35%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
+} */
 
-.employee--form{
+/* .employee--form{
   width:65%;
-}
+} */
 
 .heading {
   text-align: center;
@@ -32,13 +41,14 @@
   font-family: arvo;
   font-size: 2rem;
   font-weight: bold;
-  color: #731780;
+  color: #000000;
 }
 
 .container {
   background-color: white;
   margin-top: 4rem;
   border-radius: 0.5rem;
+  margin-bottom: 5rem;
   margin-left: auto;
   margin-right: auto;
   height: 40rem;
@@ -85,6 +95,7 @@ input[type="text"] {
 input[type="checkbox"] {
   vertical-align: middle;
   margin-right: 0.5rem;
+  
 }
 .buttons {
   display: flex;
@@ -141,7 +152,7 @@ textarea {
   border-radius: 0.3rem;
 
   font-weight: bold;
-  color: #731780;
+  color: white;
   -webkit-border-radius: 0.3rem;
   -moz-border-radius: 0.3rem;
   -ms-border-radius: 0.3rem;
@@ -180,13 +191,16 @@ i {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+ 
+  position: relative;
   align-items: center;
   width: 18rem;
   height: 20rem;
-  margin: 2rem;
+  margin: 1rem;
   border-radius: 0.4rem;
   background-color: white;
+  
+  
 
   overflow-y: auto;
   /* box-shadow: 1px 1px 1px 1px rgb(204, 190, 190); */
@@ -200,13 +214,30 @@ i {
   -o-border-radius: 0.4rem;
 }
 
+input{
+  padding:1px;
+}
+
+
+
 .post > div {
   margin: 0.3rem 1rem;
   text-align: center;
 }
+
+.post:hover{
+  zoom: 1.02;
+
+}
+.filter-text{
+  color:white;
+  margin-bottom: 0.3rem;
+}
+
 .avatar {
   color: white;
-  background-color: rgba(40, 214, 176, 0.726);
+  display: inline-block;
+  background-color: rgba(40, 165, 214, 0.726);
   border-radius: 2rem;
   font-weight: 600;
   -webkit-border-radius: 2rem;
@@ -287,7 +318,7 @@ i {
 .loading-modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 3;
   left: 0;
   top: 0;
   height: 100%;
@@ -300,6 +331,7 @@ i {
   visibility: none;
   text-align: center;
   margin-top: 50vh;
+  z-index: 5
 }
 .ring-1 {
   width: 10px;
@@ -371,12 +403,12 @@ strong {
   * {
     font-size: 16px;
   }
-  .employee--form{
+  /* .employee--form{
     width:55%;
   }
   .cards{
     width:55%;
-  }
+  } */
 }
 @media screen and (max-width: 900px) {
   * {
@@ -385,7 +417,7 @@ strong {
   .modal-content {
     width: 80%;
   }
-  .parent{
+  /* .parent{
     flex-direction: column;
   }
   .cards{
@@ -393,7 +425,7 @@ strong {
   }
   .employee--form{
     width:100%;
-  }
+  } */
 }
 
 .btn-delete{
@@ -404,5 +436,89 @@ strong {
 button{
   border:none;
 }
+
+
+.side-drawer-icon{
+  margin-left:1rem;
+  margin-top:1rem;
+  font-size: 1.5rem;
+  cursor:pointer;
+  color: rgb(77, 64, 64);
+}
+
+
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(100, 107, 117);
+  
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #f0ecec;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #e0cdcd;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.container {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+.three-dots{
+  position: absolute;
+  height: 10rem;
+  left:7rem;
+  top:0.5rem;
+  cursor: pointer;
+}
+
+.three-dots-options{
+  /* background-color:rgb(247, 247, 247);
+  position: absolute;
+  top:10rem;
+  color:black; */
+  position:absolute;
+  justify-self: flex-start;
+  top:2.1rem;
+  height: 4rem;
+  border:1px solid red;
+  width: 3rem;
+
+  /* height:5rem; */
+}
+
+/* .delete-card,
+.edit-card{
+  display: inline-block;
+  align-self: flex-end;
+
+} */
+
+
 
 

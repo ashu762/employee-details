@@ -12,6 +12,12 @@ export function validateName(name, type) {
 export function createPost(post) {
   const ele = document.createElement("div");
   ele.classList.add("post");
+
+  // const threeDotsMenu=document.createElement("div");
+  // threeDotsMenu.classList.add("three-dots");
+  // threeDotsMenu.id=post._id;
+  // threeDotsMenu.innerHTML=`<i class="fa fa-ellipsis-v fa-lg" aria-hidden="true" id=${post._id}>`;
+  // ele.appendChild(threeDotsMenu)
   const avatartext = (post["firstName"][0] + post["lastName"][0]).toUpperCase();
   const avatardiv = document.createElement("span");
   avatardiv.innerText = avatartext;
