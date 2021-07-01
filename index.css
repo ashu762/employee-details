@@ -193,14 +193,14 @@ i {
   display: flex;
   flex-direction: column;
   justify-content: center;
- 
+  
   position: relative;
   align-items: center;
   width: 18rem;
   height: 20rem;
   margin: 1rem;
   border-radius: 0.4rem;
-  background-color: white;
+  background-color: rgb(238, 229, 229);
   
   
 
@@ -228,7 +228,8 @@ input{
 }
 
 .post:hover{
-  zoom: 1.02;
+  
+  background-color:white;
 
 }
 .filter-text{
@@ -405,12 +406,7 @@ strong {
   * {
     font-size: 16px;
   }
-  /* .employee--form{
-    width:55%;
-  }
-  .cards{
-    width:55%;
-  } */
+  
 }
 @media screen and (max-width: 900px) {
   * {
@@ -419,15 +415,6 @@ strong {
   .modal-content {
     width: 80%;
   }
-  /* .parent{
-    flex-direction: column;
-  }
-  .cards{
-    width:100%;
-  }
-  .employee--form{
-    width:100%;
-  } */
 }
 
 .btn-delete{
@@ -461,7 +448,7 @@ button{
   background-color: rgb(100, 107, 117);
   
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.4s;
   padding-top: 60px;
 }
 
@@ -523,3 +510,6 @@ button{
 
 
 
+#filter-btn{
+  padding: 2px 5px;
+}
