@@ -192,6 +192,7 @@ function resetData() {
   recoverConfiguration();
   previousPosts.innerText=""
   isEditableForm=false;
+  filterInput.value="";
   employeeId=""
 }
 
