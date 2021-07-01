@@ -1,4 +1,4 @@
-import { validateName, createPost,isFilteredEvent } from "./utils.js";
+import { validateName, createPost, isFilteredEvent } from "./utils.js";
 
 // Dom Element Selections
 const firstName = document.querySelector("#firstName");
@@ -13,37 +13,36 @@ const spouseIcon = document.querySelector(".icon--spouse");
 const errorContainer = document.querySelector(".errors");
 const checkBoxIcon = document.querySelector(".icon--checkbox");
 const resetButton = document.querySelector(".reset");
-const deleteButton=document.querySelector(".btn-delete");
+const deleteButton = document.querySelector(".btn-delete");
 const male = document.querySelector("#male");
-const married=document.querySelector("#married");
-const female=document.querySelector("#female");
-const unmarried=document.querySelector("#unmarried");
+const married = document.querySelector("#married");
+const female = document.querySelector("#female");
+const unmarried = document.querySelector("#unmarried");
 const loading = document.querySelector(".loading");
 const loadingModal = document.querySelector(".loading-modal");
 const previousPosts = document.querySelector(".previous-posts");
-const viewEmployeeModal=document.querySelector(".viewEmployeeModal");
-const employeeModal=document.querySelector(".employeeModal");
-const drawerCloseButton=document.querySelector(".closebtn");
-const drawer=document.querySelector("#mySidenav");
-const drawerButton=document.querySelector(".side-drawer-icon")
-const threeDotsMenu=document.querySelector(".three-dots");
-let previousEmployeeData;
+const viewEmployeeModal = document.querySelector(".viewEmployeeModal");
+const employeeModal = document.querySelector(".employeeModal");
+const drawerCloseButton = document.querySelector(".closebtn");
+const drawer = document.querySelector("#mySidenav");
+const drawerButton = document.querySelector(".side-drawer-icon");
+const threeDotsMenu = document.querySelector(".three-dots");
+let previousEmployeeData = [];
+let hasFetechedData = false;
 const url = "https://employeeapi2626.herokuapp.com/api/employees";
-const filterButton=document.querySelector("#filter-btn")
-const previousFormBtn=document.querySelector("#previousFormBtn");
-const dropDownElementSelector=document.querySelector("#selector");
+const filterButton = document.querySelector("#filter-btn");
+const previousFormBtn = document.querySelector("#previousFormBtn");
+const dropDownElementSelector = document.querySelector("#selector");
 
+const formContainer = document.querySelector(".container");
 
-const formContainer=document.querySelector(".container");
-
-const filterInput=document.querySelector(".filter-input");
+const filterInput = document.querySelector(".filter-input");
 let isAutoFocused = false;
 const errors = [];
 let isMarried = true;
 
-let isEditableForm=false;
-let employeeId="";
-
+let isEditableForm = false;
+let employeeId = "";
 
 // Validators
 
@@ -118,9 +117,6 @@ function removeLoading() {
 
 // Form Submission
 async function submitForm() {
-
-
-
   setLoading();
   const data = {
     firstName: firstName.value,
@@ -130,9 +126,9 @@ async function submitForm() {
     gender: male.checked ? "male" : "female",
     comments: other.value,
   };
-  const queryString=isEditableForm?employeeId:"";
+  const queryString = isEditableForm ? employeeId : "";
   const url = `https://employeeapi2626.herokuapp.com/api/employees/${queryString}`;
-  const method=isEditableForm?"PUT":"POST";
+  const method = isEditableForm ? "PUT" : "POST";
   try {
     let response = await fetch(url, {
       method: method,
@@ -142,14 +138,15 @@ async function submitForm() {
       body: JSON.stringify(data),
     });
     response = await response.json();
+    await fetchPreviousForms();
     removeLoading();
     alert("Thank you.Your response has been Saved");
     resetData();
   } catch (error) {
     console.log(error);
     removeLoading();
-    isEditableForm=false;
-    employeeId="";
+    isEditableForm = false;
+    employeeId = "";
     alert("Please try Again!");
   }
 }
@@ -180,6 +177,7 @@ submitButton.addEventListener("click", (event) => {
   submitForm();
 });
 
+
 function resetData() {
   errorContainer.innerHTML = "";
   firstName.focus();
@@ -188,43 +186,24 @@ function resetData() {
   lastNameIcon.classList.add("icon--lastName");
   spouseIcon.classList.add("icon--spouse");
   checkBoxIcon.classList.add("icon--checkbox");
-  setValues({})
+  checkBox.checked = false;
+  setValues({});
   recoverConfiguration();
-  previousPosts.innerText=""
-  isEditableForm=false;
-  filterInput.value="";
-  employeeId=""
+  previousPosts.innerText = "";
+  isEditableForm = false;
+  filterInput.value = "";
+  employeeId = "";
 }
 
 resetButton.addEventListener("click", resetData);
 
-async function fetchPreviousForms(input,type) {
+async function fetchPreviousForms() {
   setLoading();
   try {
     let response = await fetch(url);
     response = await response.json();
-    const posts = [];
-    previousPosts.innerHTML = "";
-    let numberOfPosts=0;
-    for (let post of response) {
-      if(!type)
-      {
-        numberOfPosts++;
-        previousPosts.appendChild(createPost(post));
-      }
-      
-      if(type&&isFilteredEvent(input,type,post))
-      {
-        previousPosts.appendChild(createPost(post));
-        numberOfPosts++;
-      }
-      
-    }
-
-    if(type&&numberOfPosts===0)
-    {
-        alert("No filter Found for the specified data")
-    }
+    previousEmployeeData = response;
+    hasFetechedData = true;
     removeLoading();
   } catch (error) {
     removeLoading();
@@ -232,7 +211,66 @@ async function fetchPreviousForms(input,type) {
   }
 }
 
+function fillData(input, type,isDebounced) {
 
+  previousPosts.innerHTML = "";
+  let numberOfPosts = 0;
+  for (let post of previousEmployeeData) {
+    if (!type) {
+      numberOfPosts++;
+      previousPosts.appendChild(createPost(post));
+    }
+
+    if (type && isFilteredEvent(input, type, post)) {
+      previousPosts.appendChild(createPost(post));
+      numberOfPosts++;
+    }
+  }
+  if(isDebounced)
+  return;
+
+  if (type && numberOfPosts === 0) {
+    alert("No filter Found for the specified data");
+  }
+}
+
+// async function fetchPreviousForms(input,type) {
+//   setLoading();
+//   try {
+//     let response = await fetch(url);
+//     response = await response.json();
+//     const posts = [];
+//     previousPosts.innerHTML = "";
+//     let numberOfPosts=0;
+//     for (let post of response) {
+//       if(!type)
+//       {
+//         numberOfPosts++;
+//         previousPosts.appendChild(createPost(post));
+//       }
+
+//       if(type&&isFilteredEvent(input,type,post))
+//       {
+//         previousPosts.appendChild(createPost(post));
+//         numberOfPosts++;
+//       }
+
+//     }
+
+//     if(type&&numberOfPosts===0)
+//     {
+//         alert("No filter Found for the specified data")
+//     }
+//     removeLoading();
+//   } catch (error) {
+//     removeLoading();
+//     console.log(error);
+//   }
+// }
+
+if (!hasFetechedData) {
+  fetchPreviousForms();
+}
 
 // Modal
 const modal = document.querySelector("#my-modal");
@@ -257,140 +295,130 @@ function outsideClick(e) {
   }
 }
 
-
-window.addEventListener("click",async(e)=>{
-
-  if(e.target.innerText==="Edit Details")
-  {
-      setLoading();
-      drawer.style.width="0px";
-      resetData();
-      isEditableForm=true;
-      employeeId=e.target.id;
-      let employee=await fetch(`${url}/${e.target.id}`);
-      checkBox.checked=true;
-      employee=await employee.json();
-      setValues(employee[0]);
-      changeConfiguration();
-
-      removeLoading();
+window.addEventListener("click", async (e) => {
+  if (e.target.innerText === "Edit Details") {
+    setLoading();
+    drawer.style.width = "0px";
+    resetData();
+    isEditableForm = true;
+    employeeId = e.target.id;
+    let employee = await fetch(`${url}/${e.target.id}`);
+    checkBox.checked = true;
+    employee = await employee.json();
+    setValues(employee[0]);
+    changeConfiguration();
+    
+    removeLoading();
   }
+});
+
+previousFormBtn.addEventListener("click", (e) => {
+  fillData();
+});
+
+const debounce = (func, wait) => {
   
-  
-})
+  let timeout;
+ 
+  return function executedFunction(...args) {
+    
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
 
-
-
-
-previousFormBtn.addEventListener("click",(e)=>{
-  fetchPreviousForms();
-})
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+function filterDebounceData()
+{
+  fillData(filterInput.value,dropDownElementSelector.value,true)
+}
+let printer=debounce(filterDebounceData,500);
 
 
 //filter handling
+filterInput.addEventListener("keydown",printer);
 
-filterButton.addEventListener("click",(e)=>{
+
+filterButton.addEventListener("click", (e) => {
   e.preventDefault();
-  const type=dropDownElementSelector.value;
-  const filteredInput=filterInput.value;
-  fetchPreviousForms(filteredInput,type);
+  const type = dropDownElementSelector.value;
+  const filteredInput = filterInput.value;
+  fillData(filteredInput,type);
+});
 
+function setValues(employee) {
+  firstName.value = employee.firstName || "";
+  lastName.value = employee.lastName || "";
+  spouse.value = employee.spouse || "";
+  toggle(male, female);
+  toggle(married, unmarried);
+  if (employee.gender === "female") toggle(female, male);
+  if (employee.martial_status === "unmarried") {
+    toggle(unmarried, married);
+    spouse.disabled = true;
+    isMarried = false;
+  }
+  if (employee.martial_status === "married") spouse.disabled = false;
 
-})
-
-
-function setValues(employee)
-{
-  
-  firstName.value=employee.firstName || "";
-  lastName.value=employee.lastName|| "";
-  spouse.value=employee.spouse||"";
-  toggle(male,female);
-  toggle(married,unmarried);
-  if(employee.gender==='female')
-    toggle(female,male);
-  if(employee.martial_status==="unmarried")
-    {
-      toggle(unmarried,married);
-      spouse.disabled=true;
-      isMarried=false;
-    }
-  if(employee.martial_status==="married")
-  spouse.disabled=false;
-  
-  other.value=employee.comments||"";
+  other.value = employee.comments || "";
 }
 
-function toggle(val1,val2)
-{
-  val1.checked=true;
-  val2.checked=false;
+function toggle(val1, val2) {
+  val1.checked = true;
+  val2.checked = false;
 }
 
-function changeConfiguration()
-{
-  submitButton.innerText="UPDATE";
-  resetButton.innerText="CANCEL";
-  deleteButton.style.display="block"
+function changeConfiguration() {
+  submitButton.innerText = "UPDATE";
+  resetButton.innerText = "CANCEL";
+  deleteButton.style.display = "block";
 }
-function recoverConfiguration()
-{
-    deleteButton.style.display="none";
-    resetButton.innerText="RESET";
-    submitButton.innerText="SUBMIT";
+function recoverConfiguration() {
+  deleteButton.style.display = "none";
+  resetButton.innerText = "RESET";
+  submitButton.innerText = "SUBMIT";
 }
 
+deleteButton.addEventListener("click", async (e) => {
+  setLoading();
+  try {
+    let data = await fetch(`${url}/${employeeId}`, {
+      method: "DELETE",
+    });
+    data = await data.json();
+    console.log(data);
+    previousPosts.innerText = "";
+    setValues({});
+    alert("Employee Details Deletion Successful");
+    removeLoading();
+    recoverConfiguration();
+    isEditableForm = false;
+    employeeId = "";
+    filterInput.value = "";
+    fetchPreviousForms();
+  } catch (e) {
+    console.log(e);
+    alert("Some Error Occured");
+    removeLoading();
+  }
+});
 
-deleteButton.addEventListener("click",async(e)=>{
+drawerButton.addEventListener("click", (e) => {
+  drawer.style.width = "27rem";
 
-    setLoading();
-    try{
-      let data=await fetch(`${url}/${employeeId}`,{
-        method:"DELETE"
-      })
-      data=await data.json();
-      console.log(data);
-      previousPosts.innerText="";
-      setValues({});
-      alert("Employee Details Deletion Successful")
-      removeLoading();
-      recoverConfiguration();
-      isEditableForm=false;
-      employeeId="";
-      filterInput.value="";
+  if (window.innerWidth < 1400) drawer.style.width = "100%";
+});
 
-
-
-    }
-    catch(e)
-    {
-      console.log(e);
-      alert("Some Error Occured");
-      removeLoading();
-    }
-})
-
-
-
-
-drawerButton.addEventListener("click",(e)=>{
-  
-  drawer.style.width="27rem";
-
- if(window.innerWidth<1400)
- drawer.style.width="100%"
-})
-
-drawerCloseButton.addEventListener("click",(e)=>{
- 
-  drawer.style.width="0px";
-})
-
+drawerCloseButton.addEventListener("click", (e) => {
+  drawer.style.width = "0px";
+});
 
 // window.addEventListener("click",(e)=>{
 //   if(e.target.id)
 //   {
-    
+
 //   }
 // })
-
