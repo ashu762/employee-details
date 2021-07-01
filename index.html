@@ -1,175 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form</title>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index.css" />
     <script src="index.js" defer type="module"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="side-drawer-icon">
-        <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+      <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
     </div>
     <div class="parent">
-        <div class="employee--form">
-    <div class="heading">Employee Input Form</div>
-    <div class="container">
-        <div class="errors">
-        </div>
-        <form>
+      <div class="employee--form">
+        <div class="heading">Employee Input Form</div>
+        <div class="container">
+          <div class="errors"></div>
+          <form>
             <div class="element">
-                <label for="firstName">First Name</label>
+              <label for="firstName">First Name</label>
+              <div>
+                <input type="text" id="firstName" name="firstName" autofocus />
+                <i class="fa fa-exclamation-circle fa-lg icon icon--firstName">
+                </i>
+              </div>
+            </div>
+
+            <div class="element">
+              <label for="lastName">Last Name</label>
+              <div>
+                <input type="text" id="lastName" name="lastName" />
+                <i class="fa fa-exclamation-circle fa-lg icon icon--lastName">
+                </i>
+              </div>
+            </div>
+            <div class="element">
+              <label>Gender</label>
+              <div class="radios">
                 <div>
-                    <input type="text" id="firstName" name="firstName" autofocus>
-                    <i class="fa fa-exclamation-circle fa-lg icon icon--firstName">
-                    </i>
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="MALE"
+                    checked
+                  />
+                  <span for="male">MALE</span>
                 </div>
-            </div>
-
-            <div class="element">
-                <label for="lastName">Last Name</label>
                 <div>
-                    <input type="text" id="lastName" name="lastName">
-                    <i class="fa fa-exclamation-circle fa-lg icon icon--lastName">
-
-                    </i>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="FEMALE"
+                  />
+                  <span for="female">FEMALE</span>
                 </div>
-
+                <!-- <i class="fa fa-exclamation-circle fa-lg"></i> -->
+              </div>
             </div>
             <div class="element">
-                <label>Gender</label>
-                <div class="radios">
-                    <div>
-                        <input type="radio" id="male" name="gender" value="MALE" checked>
-                        <span for="male">MALE</span>
-                    </div>
-                    <div>
-                        <input type="radio" id="female" name="gender" value="FEMALE">
-                        <span for="female">FEMALE</span>
-                    </div>
-                    <!-- <i class="fa fa-exclamation-circle fa-lg"></i> -->
-
-                </div>
-
-
-            </div>
-            <div class="element">
-                <label>Martial Status</label>
-                <div class="radios">
-                    <div>
-                        <input type="radio" id="married" name="martial_status" value="Married" checked>
-                        <span for="married">Married</span>
-                    </div>
-                    <div>
-                        <input type="radio" id="unmarried" name="martial_status" value="Unmarried">
-                        <span for="unmarried">Unmarried</span>
-
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="element">
-                <label for="spouse">Name of Spouse</label>
+              <label>Martial Status</label>
+              <div class="radios">
                 <div>
-                    <input type="text" id="spouse" name="spouse">
-
-                    <i class="fa fa-exclamation-circle fa-lg icon icon--spouse"></i>
+                  <input
+                    type="radio"
+                    id="married"
+                    name="martial_status"
+                    value="Married"
+                    checked
+                  />
+                  <span for="married">Married</span>
                 </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="unmarried"
+                    name="martial_status"
+                    value="Unmarried"
+                  />
+                  <span for="unmarried">Unmarried</span>
+                </div>
+              </div>
+            </div>
 
+            <div class="element">
+              <label for="spouse">Name of Spouse</label>
+              <div>
+                <input type="text" id="spouse" name="spouse" />
+
+                <i class="fa fa-exclamation-circle fa-lg icon icon--spouse"></i>
+              </div>
             </div>
             <div class="element">
-                <label for="other">Other Details</label>
-                <div>
-                    <textarea type="text" id="other" name="other"></textarea>
-                    <i class="fa fa-exclamation-circle fa-lg icon icon--other"></i>
-                </div>
-
+              <label for="other">Other Details</label>
+              <div>
+                <textarea type="text" id="other" name="other"></textarea>
+                <i class="fa fa-exclamation-circle fa-lg icon icon--other"></i>
+              </div>
             </div>
             <div class="terms">
-                <input type="checkbox" id="checked" name="checked">
-                <span>I accept the <span class="termsLink" id="modal-btn">terms and conditions</span></span>
-                <div id="my-modal" class="modal">
-                    <div class="modal-content">
+              <input type="checkbox" id="checked" name="checked" />
+              <span
+                >I accept the
+                <span class="termsLink" id="modal-btn"
+                  >terms and conditions</span
+                ></span
+              >
+              <div id="my-modal" class="modal">
+                <div class="modal-content">
+                  <div class="terms--title">Terms And Conditions</div>
 
-                        <div class="terms--title">Terms And Conditions</div>
-
-                        <div class="terms-content">
-                            <div class="term">1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-                                similique maiores ratione ex voluptatibus, necessitatibus labore explicabo dolore magnam
-                                amet voluptates aspernatur a excepturi minima fugit molestiae quisquam ad eligendi.
-                            </div>
-                            <div class="term">2. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores, ut!
-                            </div>
-                            <div class="term">3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-                                molestiae odit sed officiis sunt provident corrupti, rem eaque exercitationem illum?
-                            </div>
-                            <div class="term">4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                                blanditiis doloremque cumque. Et, dolorem ea?</div>
-                            <div class="term">5. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex hic
-                                explicabo,
-                                dolore incidunt, repellendus, placeat accusantium saepe pariatur aut quam doloremque!
-                                Quia in ratione praesentium!</div>
-
-                            <div class="btn close-btn">OK</div>
-                        </div>
-
-
+                  <div class="terms-content">
+                    <div class="term">
+                      1. Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit. Quaerat similique maiores ratione ex voluptatibus,
+                      necessitatibus labore explicabo dolore magnam amet
+                      voluptates aspernatur a excepturi minima fugit molestiae
+                      quisquam ad eligendi.
                     </div>
-                </div>
-                <i class="fa fa-exclamation-circle fa-lg icon icon--checkbox"></i>
+                    <div class="term">
+                      2. Lorem ipsum, dolor sit amet consectetur adipisicing
+                      elit. Dolores, ut!
+                    </div>
+                    <div class="term">
+                      3. Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit. Explicabo molestiae odit sed officiis sunt provident
+                      corrupti, rem eaque exercitationem illum?
+                    </div>
+                    <div class="term">
+                      4. Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit. Animi blanditiis doloremque cumque. Et, dolorem ea?
+                    </div>
+                    <div class="term">
+                      5. Lorem ipsum dolor sit amet consectetur adipisicing
+                      elit. Ex hic explicabo, dolore incidunt, repellendus,
+                      placeat accusantium saepe pariatur aut quam doloremque!
+                      Quia in ratione praesentium!
+                    </div>
 
+                    <div class="btn close-btn">OK</div>
+                  </div>
+                </div>
+              </div>
+              <i class="fa fa-exclamation-circle fa-lg icon icon--checkbox"></i>
             </div>
             <div class="buttons">
-                <div class="btn reset">RESET</div>
-                <div class="btn btn-delete">DELETE</div>
-                <div class="btn btn-submit">SUBMIT</div>
-                
+              <div class="btn reset">RESET</div>
+              <div class="btn btn-delete">DELETE</div>
+              <div class="btn btn-submit">SUBMIT</div>
             </div>
-        </form>
-    </div>
-
-    <div class="loading-modal">
-        <div class="loading">
-            <div class="load-4">
-
-                <div class="ring-1"></div>
-            </div>
+          </form>
         </div>
-    </div>
-    <div class="viewEmployeeModal">
-        
-    </div>
 
-    
+        <div class="loading-modal">
+          <div class="loading">
+            <div class="load-4">
+              <div class="ring-1"></div>
+            </div>
+          </div>
+        </div>
+        <div class="viewEmployeeModal"></div>
+      </div>
+      <div class="cards sidenav" id="mySidenav">
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
+        <div class="previous">
+          <div class="btn previous--title" id="previousFormBtn">
+            Previous Forms
+          </div>
+          <div class="filter-text">Filter</div>
+          <form>
+            <input class="filter-input" />
+            <label for="options"></label>
+            <select name="options" value="options" id="selector">
+              <option value="firstName">First Name</option>
+              <option value="lastName">Last Name</option>
+              <option value="gender">Gender</option>
+              <option value="martial_status">Martial Status</option>
+              <option value="spouse">Spouse</option>
+            </select>
+            <button class="btn previous--title" id="filter-btn" type="submit">Submit</button>
+          </form>
 
-</div>
-<div class="cards sidenav" id="mySidenav" >
-    <a href="javascript:void(0)" class="closebtn">&times;</a>
-    <div class="previous">
-        <div class="btn previous--title" id="previousFormBtn">Previous Forms</div>
-        <div class="filter-text">Filter</div>
-        
-            <input class="filter-input">
-        <label for="options"></label>
-        <select name="options" value="options" id="selector">
-            <option value="firstName">First Name</option>
-            <option value="lastName">Last Name</option>
-            <option value="gender">Gender</option>
-            <option value="martial_status">Martial Status</option>
-            <option value="spouse">Spouse</option>
-           
-        </select>
-        <div class="btn previous--title" id="filter-btn">Submit</div>
-        
-        
-        
-        <div class="previous-posts">
-        
+          <div class="previous-posts">
             <!-- <div class="post">
                 <div class="three-dots-options">
                     <div class="delete-card">Delete</div>
@@ -198,14 +216,11 @@
                     </div>
                 </div>
             </div> -->
-
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
-
-</body>
-
+  </body>
 </html>
 
 <!-- 

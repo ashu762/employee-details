@@ -289,6 +289,7 @@ previousFormBtn.addEventListener("click",(e)=>{
 //filter handling
 
 filterButton.addEventListener("click",(e)=>{
+  e.preventDefault();
   const type=dropDownElementSelector.value;
   const filteredInput=filterInput.value;
   fetchPreviousForms(filteredInput,type);
