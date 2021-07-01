@@ -406,6 +406,7 @@ deleteButton.addEventListener("click", async (e) => {
   }
 });
 
+
 drawerButton.addEventListener("click", (e) => {
   drawer.style.width = "27rem";
 

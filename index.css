@@ -9,6 +9,8 @@
   
 }
 body{
+  width:100%;
+
  
   /* background: #ad5389;  
 background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  
@@ -38,7 +40,7 @@ background-image :linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%);
 
 .heading {
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 3rem;
   font-family: arvo;
   font-size: 2rem;
   font-weight: bold;
@@ -428,8 +430,12 @@ button{
 
 
 .side-drawer-icon{
-  margin-left:1rem;
-  margin-top:1rem;
+  /* margin-left:1rem;
+  margin-top:1rem; */
+  
+  /* width:100%; */
+  margin-left:90%;
+  margin-top:2rem;
   font-size: 1.5rem;
   cursor:pointer;
   color: rgb(77, 64, 64);
@@ -444,7 +450,7 @@ button{
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
+  right: 0;
   background-color: rgb(100, 107, 117);
   
   overflow-x: hidden;
