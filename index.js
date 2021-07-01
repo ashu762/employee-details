@@ -315,6 +315,8 @@ function setValues(employee)
       spouse.disabled=true;
       isMarried=false;
     }
+  if(employee.martial_status==="married")
+  spouse.disabled=false;
   
   other.value=employee.comments||"";
 }
