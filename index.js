@@ -374,7 +374,7 @@ drawerButton.addEventListener("click",(e)=>{
   
   drawer.style.width="27rem";
 
- if(window.screen.width<1400)
+ if(window.innerWidth<1400)
  drawer.style.width="100%"
 })
 
